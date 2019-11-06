@@ -73,17 +73,17 @@ table {
   width: 50px;
   background: blue;
   position: absolute;
-  top: 50px;
+  bottom: 50px;
   left: 50px;
 }
 
 #ennemi3{
   height: 50px;
   width: 50px;
-  background: black;
+  background: purple;
   position: absolute;
   top: 50px;
-  left: 50px;
+  right: 50px;
 }
 
 #ennemi4{
@@ -91,6 +91,23 @@ table {
   width: 50px;
   background: green;
   position: absolute;
-  top: 50px;
-  left: 50px;
+  bottom: 50px;
+  right: 50px;
+}
+
+.bombashit{
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background : black;
+}
+.explosion{
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background: red;
+  transition: transform 5s ease-in;
+}
+.ex2{
+  transform: scale(3);
 }

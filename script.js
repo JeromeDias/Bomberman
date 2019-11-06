@@ -1,4 +1,5 @@
-//chosit un nombre aléatoire
+$(document).ready(function() {
+  //chosit un nombre aléatoire
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -239,3 +240,53 @@ switch (random) {
     break;
 }
 },1000)
+
+function drop_bomb() {
+  let nuub_x = window.getComputedStyle(carre).getPropertyValue("left");
+  let nuub_y =  window.getComputedStyle(carre).getPropertyValue("bottom");
+  let screen = document.getElementById('ecran');
+  let bomba = document.createElement('div');
+  bomba.classList.add('bombashit')
+  screen.appendChild(bomba)
+  bomba.style.left = nuub_x;
+  bomba.style.bottom = nuub_y; 
+  setTimeout(function() {
+    bomba.remove()
+    ie -= 1;
+  }, 2000); 
+  setTimeout(function () {
+    let screen = document.getElementById('ecran');
+    let explosion = document.createElement('div')
+    explosion.classList.add('explosion')
+    screen.appendChild(explosion)
+    explosion.style.left = nuub_x;
+    explosion.style.bottom = nuub_y;
+    explosion.classList.add('ex2')
+      // setTimeout(function(){
+      //   explosion.style.width = "150px";
+      //   explosion.style.height = "150px"; 
+      // },500)
+      setTimeout(function(){
+        explosion.remove()
+      },500)
+    },1000)
+       
+}
+let ie = 0;
+window.addEventListener('keydown', function (e) {
+  if (e.keyCode === 32) {
+    if (ie < 3) {
+      ie += 1;
+      drop_bomb();
+    }    
+    
+  }  
+})
+  
+})
+
+
+
+
+
+
