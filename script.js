@@ -242,51 +242,78 @@ switch (random) {
 },1000)
 
 function drop_bomb() {
-  let nuub_x = window.getComputedStyle(carre).getPropertyValue("left");
-  let nuub_y =  window.getComputedStyle(carre).getPropertyValue("bottom");
+  let nuub_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+  let nuub_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
   let screen = document.getElementById('ecran');
   let bomba = document.createElement('div');
   bomba.classList.add('bombashit')
   screen.appendChild(bomba)
-  bomba.style.left = nuub_x;
-  bomba.style.bottom = nuub_y; 
+  bomba.style.left = nuub_x + "px";
+  bomba.style.bottom = nuub_y + "px";
   setTimeout(function() {
     bomba.remove()
     ie -= 1;
-  }, 2000); 
+  }, 1500);
   setTimeout(function () {
     let screen = document.getElementById('ecran');
-    let explosion = document.createElement('div')
-    explosion.classList.add('explosion')
-    screen.appendChild(explosion)
-    explosion.style.left = nuub_x;
-    explosion.style.bottom = nuub_y;
-    explosion.classList.add('ex2')
-      // setTimeout(function(){
-      //   explosion.style.width = "150px";
-      //   explosion.style.height = "150px"; 
-      // },500)
-      setTimeout(function(){
+    let explosion = document.createElement('div');
+    explosion.classList.add('explosion');
+    screen.appendChild(explosion);
+    explosion.style.left = nuub_x + "px";
+    explosion.style.bottom = nuub_y + "px";
+    explosion.classList.add('ex2');
+    let ex2value = document.getElementsByClassName('ex2');
+    let enemy_temp = document.getElementsByClassName('enemy');
+    function hitbox(){
+        for (var i = 0; i < ex2value.length; i++) {
+          ex2value[i].style.left = nuub_x - 50 + "px";
+          ex2value[i].style.bottom = nuub_y - 50 + "px";
+          let ex2_pos_left = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("left"));
+          let ex2_pos_bottom = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("bottom"));
+          let ex2_width = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("width"));
+          let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
+          let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
+          let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
+          console.log(ex2_width, ex2_height);
+          for (var i = 0; i < enemy_temp.length; i++) {
+            let enemy_pos_left = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("left"));
+            let enemy_pos_bottom = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("bottom"));
+            let enemy_width = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("width"));
+            let enemy_height = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("height"));
+            let enemy_pos_right = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("right"));
+            let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
+            console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
+            if (enemy_pos_top > ex2_pos_top && enemy_pos_bottom > ex2_pos_bottom && enemy_pos_left > ex2_pos_left && enemy_pos_right > ex2_pos_right) {
+              alert('gg');
+            }
+          }
+        }
+    }
+    hitbox();
+    setTimeout(function(){
         explosion.remove()
       },500)
     },1000)
-       
+
 }
 let ie = 0;
-window.addEventListener('keydown', function (e) {
-  if (e.keyCode === 32) {
-    if (ie < 3) {
-      ie += 1;
-      drop_bomb();
-    }    
-    
-  }  
+let cooldown_keyboard = 0;
+  window.addEventListener('keydown', function (e) {
+    if (e.keyCode === 32) {
+      if (cooldown_keyboard == 0) {
+        cooldown_keyboard = 1;
+        setTimeout(function(){
+          cooldown_keyboard = 0;
+        },500)
+        if (ie < 3) {
+          ie += 1;
+          drop_bomb();
+        }
+      }
+
+    }
+    console.log(cooldown_keyboard);
+  })
+
+
 })
-  
-})
-
-
-
-
-
-
