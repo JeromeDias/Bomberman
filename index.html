@@ -13,6 +13,7 @@
 <body class="PressStart">
   <header>
     <h1>BomberMeuh: HardCore Edition</h1>
+    <div class="enemy"></div>
   </header>
   <section>
     <div id="col-gauche" class="col-width">
@@ -23,7 +24,23 @@
           <div id="retry">
               <div id="retry-content">
                   <div class="content-screen-retry">
-                    <p>GameOver</p>
+                    <p>Game Over !<br><br>
+                      Fatality !
+                    </p>
+                    <img id="gameover"src="/img/Gameover/gameover.gif" alt="gameover">
+                  </div>
+                  <div class="content-screen-retry">
+                    <p id="retry-button">Retry</p>
+                  </div>
+              </div>
+            </div>
+      </div>
+      <div id="win-screen" class="dis-none">
+          <div id="win">
+              <div id="retry-content">
+                  <div class="content-screen-retry">
+                    <p>You win !</p>
+                    <img id="gameover"src="/img/Gameover/gameover" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
                     <p id="retry-button">Retry</p>
@@ -42,9 +59,9 @@
     </div>
   </section>
   <footer>
-    <p>chef de projet: jérôme</p>
-    <p>developper: vecteur</p>
-    <p>designer: MySQL-r</p>
+    <p>Chef de projet: Jérôme</p>
+    <p>Developper: Vecteur</p>
+    <p>Designer: MySQL-r</p>
   </footer>
   
   

@@ -60,6 +60,7 @@ function move(element, direction) {
 }
 
 // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
+
 window.addEventListener("keydown", function(event) {
   switch (event.keyCode) {
     //haut
@@ -88,6 +89,38 @@ window.addEventListener("keydown", function(event) {
       //code quand on va à gauche
       move(carre, "gauche");
       carre.style.background = "URL('/img/hero/hero_gauche.gif')"
+      break;
+  }
+});
+
+window.addEventListener("keyup", function(event) {
+  switch (event.keyCode) {
+    //haut
+    case 38:
+      //code quand on va en haut
+      
+      carre.style.background = "URL('/img/hero/hero_fixe_haut.png')"
+      break;
+
+    //droite
+    case 39:
+      //code quand on va à droite
+      
+      carre.style.background = "URL('/img/hero/hero_fixe_droite.png')"
+      break;
+
+    //bas
+    case 40:
+      
+      carre.style.background = "URL('/img/hero/hero_fixe_bas.png')"
+      //code quand on va à bas
+      break;
+
+    //gauche
+    case 37:
+      //code quand on va à gauche
+
+      carre.style.background = "URL('/img/hero/hero_fixe_gauche.png')"
       break;
   }
 });
@@ -369,11 +402,13 @@ function drop_bomb() {
             console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
             if (enemy_pos_top < ex2_pos_top + ex2_width && enemy_pos_top + enemy_width > ex2_pos_top && enemy_pos_left < ex2_pos_left + ex2_height && enemy_height + enemy_pos_left > ex2_pos_left) {
               console.log('gg')
+              enemy_temp[i].remove();
           
             }
           }
         }
     }
+
     hitbox();
     function hitbox_hero(){
       for (var i = 0; i < ex2value.length; i++) {
@@ -420,7 +455,27 @@ let cooldown_keyboard = 0;
 
     }
     console.log(cooldown_keyboard);
+  
   })
-
+// Nouvel fonction
+  function endgame() {
+    let numberenemy = document.getElementsByClassName('enemy')
+    console.log('fuck');
+    
+    for (let i = 0; i < numberenemy.length; i++) {
+      console.log('hi');
+      if (numberenemy.length == 1) {
+        console.log(numberenemy);
+        let win_screen = document.getElementById('win-screen');
+        win_screen.classList.remove('dis-none')
+      }
+        
+    }
+    
+    
+  }
+  setInterval(function () {
+    endgame()
+  },50)
 
 })
