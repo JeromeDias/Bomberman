@@ -66,6 +66,7 @@ window.addEventListener("keydown", function(event) {
     case 38:
       //code quand on va en haut
       move(carre, "haut");
+      carre.style.background = URL()
       break;
 
     //droite
@@ -240,6 +241,49 @@ switch (random) {
     break;
 }
 },1000)
+let cooldown_hit = 0;
+let vie = 3;
+function contact_enemy() {
+  let enemy_temp = document.getElementsByClassName('enemy');
+  for (let i = 0; i < enemy_temp.length; i++) {
+    let hero_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+    let hero_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+    let hero_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
+    let hero_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
+    let hero_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
+    let hero_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))          
+    let enemy_pos_left = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("left"));
+    let enemy_pos_bottom = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("bottom"));
+    let enemy_width = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("width"));
+    let enemy_height = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("height"));
+    let enemy_pos_right = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("right"));
+    let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
+    if (hero_pos_top === enemy_pos_top && hero_pos_top === enemy_pos_top && hero_x === enemy_pos_left && hero_x === enemy_pos_left) {
+      if (cooldown_hit == 0) {
+        cooldown_hit = 1;
+        setTimeout(function(){
+          cooldown_hit = 0;
+        },500)
+        console.log('touché')
+        if(cooldown_hit = 1){
+          vie -= 1;
+          console.log(vie);
+          if(vie == 0){
+            console.log('game over')
+            let retry_screen = document.getElementById('retry-screen');
+            retry_screen.classList.remove('dis-none')
+          }          
+        }
+      }
+    }
+}
+
+}
+setInterval(function () {
+  contact_enemy()     
+},100)
+  
+
 
 function drop_bomb() {
   let nuub_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
@@ -268,25 +312,7 @@ function drop_bomb() {
     explosion.classList.add('ex2');
     let ex2value = document.getElementsByClassName('ex2');
     let enemy_temp = document.getElementsByClassName('enemy');
-    function hitbox_hero(){
-      for (var i = 0; i < ex2value.length; i++) {
-        let hero_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
-        let hero_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
-        let hero_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
-        let hero_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
-        let hero_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
-        let hero_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
-        let ex2_pos_left = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("left"));
-        let ex2_pos_bottom = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("bottom"));
-        let ex2_width = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("width"));
-        let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
-        let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
-        let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
-        console.log(ex2_width, ex2_height);
-        if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_x < ex2_pos_right + ex2_height && hero_height + hero_x > ex2_pos_right) {
-          console.log('game over');
-    }}}
-    hitbox_hero()
+
     function hitbox(){
         for (var i = 0; i < ex2value.length; i++) {
           ex2value[i].style.left = nuub_x - 50 + "px";
@@ -307,14 +333,35 @@ function drop_bomb() {
             let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
             console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
             if (enemy_pos_top < ex2_pos_top + ex2_width && enemy_pos_top + enemy_width > ex2_pos_top && enemy_pos_left < ex2_pos_left + ex2_height && enemy_height + enemy_pos_left > ex2_pos_left) {
-              
+              console.log('gg')
           
             }
           }
         }
     }
-        //  if (rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y) {
     hitbox();
+    function hitbox_hero(){
+      for (var i = 0; i < ex2value.length; i++) {
+        let hero_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+        let hero_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+        let hero_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
+        let hero_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
+        let hero_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
+        let hero_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
+        console.log(hero_pos_top, hero_x, hero_y, hero_pos_right, hero_width, hero_height)
+        let ex2_pos_left = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("left"));
+        let ex2_pos_bottom = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("bottom"));
+        let ex2_width = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("width"));
+        let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
+        let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
+        let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
+        console.log(ex2_width, ex2_height);
+        if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_x < ex2_pos_right + ex2_height && hero_height + hero_x > ex2_pos_right) {
+        console.log('go');
+        }
+      }
+    }
+    hitbox_hero() 
     setTimeout(function(){
         explosion.remove()
       },500)

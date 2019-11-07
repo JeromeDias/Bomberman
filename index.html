@@ -5,20 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Jeu js</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Sigmar+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="jquery-3.4.1.js"></script>
 
 </head>
-<body>
-
-  <div id="ecran" class="cadre">
-    <div id="carre"></div>
-    <div id="ennemi1" class="enemy"></div>
-    <div id="ennemi2" class="enemy"></div>
-    <div id="ennemi3" class="enemy"></div>
-    <div id="ennemi4" class="enemy"></div>
-  </div>
-
+<body class="PressStart">
+  <header>
+    <h1>BomberMeuh: HardCore Edition</h1>
+  </header>
+  <section>
+    <div id="col-gauche" class="col-width">
+    <p>describe</p>
+    </div>
+    <div id="ecran" class="cadre">
+      <div id="retry-screen" class="dis-none">
+          <div id="retry">
+              <div id="retry-content">
+                  <div class="content-screen-retry">
+                    <p>GameOver</p>
+                  </div>
+                  <div class="content-screen-retry">
+                    <p id="retry-button">Retry</p>
+                  </div>
+              </div>
+            </div>
+      </div>
+      <div id="carre"></div>
+      <div id="ennemi1" class="enemy"></div>
+      <div id="ennemi2" class="enemy"></div>
+      <div id="ennemi3" class="enemy"></div>
+      <div id="ennemi4" class="enemy"></div>
+    </div>
+    <div id="col-droite" class="col-width">
+      <p>cooldown</p>
+    </div>
+  </section>
+  <footer>
+    <p>chef de projet: jérôme</p>
+    <p>developper: vecteur</p>
+    <p>designer: MySQL-r</p>
+  </footer>
+  
+  
   <script src="script.js"></script>
 </body>
 </html>

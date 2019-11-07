@@ -24,7 +24,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
+  background-image: url(img/Background/back_2.jpg);
+  background-size : cover;
+  background-position: center;
+  
 }
 ol, ul {
 	list-style: none;
@@ -37,6 +41,10 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+.PressStart{
+  font-family: 'Press Start 2P', cursive;
+  color: #ffffff;
+}
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -45,15 +53,16 @@ table {
 .cadre{
   height: 700px;
   width: 700px;
-  background: lightgrey;
-  border: solid 2px black;
+  background-image: url(img/Background/background3.png);
+  border: solid 2px grey;
   position: relative;
 }
 
 #carre{
   height: 50px;
   width: 50px;
-  background: yellow;
+  background-image: url(img/hero/hero_fixe.png);
+  
   position: absolute;
   top: 300px;
   left: 300px;
@@ -62,7 +71,8 @@ table {
 #ennemi1{
   height: 50px;
   width: 50px;
-  background: red;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
   position: absolute;
   top: 50px;
   left: 50px;
@@ -71,7 +81,8 @@ table {
 #ennemi2{
   height: 50px;
   width: 50px;
-  background: blue;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
   position: absolute;
   bottom: 50px;
   left: 50px;
@@ -80,7 +91,8 @@ table {
 #ennemi3{
   height: 50px;
   width: 50px;
-  background: purple;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
   position: absolute;
   top: 50px;
   right: 50px;
@@ -89,7 +101,8 @@ table {
 #ennemi4{
   height: 50px;
   width: 50px;
-  background: green;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
   position: absolute;
   bottom: 50px;
   right: 50px;
@@ -99,13 +112,15 @@ table {
   position: absolute;
   height: 50px;
   width: 50px;
-  background : black;
+  background-image: url(img/bombe/bombe.gif);
+  background-size: cover;
 }
 .explosion{
   position: absolute;
   height: 50px;
   width: 50px;
-  background: red;
+  background-image: url(img/bombe/bombe.png);
+  background-size: cover;
 	transition: width 5s ease-in;
 	transition: height 5s ease-in;
 	transition: bottom 5s ease-in;
@@ -114,5 +129,57 @@ table {
 }
 .ex2{
   width: 150px;
-	height: 150px;
+  height: 150px;
+  background-image: url(img/bombe/explosion-gif-png-3.gif);
+  background-size: cover;
+}
+.dis-none{
+  display: none;
+}
+#retry{
+  position: absolute;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background: blueviolet;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#retry-content{
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.content-screen-retry{
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section{
+  display: flex;
+  justify-content: space-between;
+  height: 93vh;
+
+}
+header{
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer{
+  height: 3vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.col-width{
+  width: 200px;
+  height 100%;
 }
