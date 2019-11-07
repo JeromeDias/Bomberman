@@ -243,7 +243,11 @@ switch (random) {
 
 function drop_bomb() {
   let nuub_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+  let nuub_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+  let nuub_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
   let nuub_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
+  let nuub_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
+  let nuub_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
   let screen = document.getElementById('ecran');
   let bomba = document.createElement('div');
   bomba.classList.add('bombashit')
@@ -264,6 +268,25 @@ function drop_bomb() {
     explosion.classList.add('ex2');
     let ex2value = document.getElementsByClassName('ex2');
     let enemy_temp = document.getElementsByClassName('enemy');
+    function hitbox_hero(){
+      for (var i = 0; i < ex2value.length; i++) {
+        let hero_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+        let hero_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+        let hero_y =  parseInt(window.getComputedStyle(carre).getPropertyValue("bottom"));
+        let hero_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
+        let hero_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
+        let hero_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
+        let ex2_pos_left = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("left"));
+        let ex2_pos_bottom = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("bottom"));
+        let ex2_width = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("width"));
+        let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
+        let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
+        let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
+        console.log(ex2_width, ex2_height);
+        if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_x < ex2_pos_right + ex2_height && hero_height + hero_x > ex2_pos_right) {
+          console.log('game over');
+    }}}
+    hitbox_hero()
     function hitbox(){
         for (var i = 0; i < ex2value.length; i++) {
           ex2value[i].style.left = nuub_x - 50 + "px";
@@ -283,12 +306,14 @@ function drop_bomb() {
             let enemy_pos_right = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("right"));
             let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
             console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
-            if (enemy_pos_top > ex2_pos_top && enemy_pos_bottom > ex2_pos_bottom && enemy_pos_left > ex2_pos_left && enemy_pos_right > ex2_pos_right) {
-              alert('gg');
+            if (enemy_pos_top < ex2_pos_top + ex2_width && enemy_pos_top + enemy_width > ex2_pos_top && enemy_pos_left < ex2_pos_left + ex2_height && enemy_height + enemy_pos_left > ex2_pos_left) {
+              
+          
             }
           }
         }
     }
+        //  if (rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y) {
     hitbox();
     setTimeout(function(){
         explosion.remove()
