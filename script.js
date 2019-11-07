@@ -66,18 +66,20 @@ window.addEventListener("keydown", function(event) {
     case 38:
       //code quand on va en haut
       move(carre, "haut");
-      carre.style.background = URL()
+      carre.style.background = "URL('/img/hero/hero_haut.gif')"
       break;
 
     //droite
     case 39:
       //code quand on va à droite
       move(carre, "droite");
+      carre.style.background = "URL('/img/hero/hero_droite.gif')"
       break;
 
     //bas
     case 40:
       move(carre, "bas");
+      carre.style.background = "URL('/img/hero/hero_bas.gif')"
       //code quand on va à bas
       break;
 
@@ -85,6 +87,7 @@ window.addEventListener("keydown", function(event) {
     case 37:
       //code quand on va à gauche
       move(carre, "gauche");
+      carre.style.background = "URL('/img/hero/hero_gauche.gif')"
       break;
   }
 });
@@ -96,33 +99,41 @@ switch (random) {
   case 0:
     if(parseInt(window.getComputedStyle(ennemi1).getPropertyValue("top")) === 0){
       move(ennemi1, "bas");
+      ennemi1.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
     }
     else{
       move(ennemi1, "haut");
+      ennemi1.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
     }
     break;
     case 1:
         if(parseInt(window.getComputedStyle(ennemi1).getPropertyValue("top")) === 650){
           move(ennemi1, "haut");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
         }
         else{
           move(ennemi1, "bas");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
         }
     break;
     case 2:
         if(parseInt(window.getComputedStyle(ennemi1).getPropertyValue("left")) === 0){
           move(ennemi1, "droite");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
         else{
           move(ennemi1, "gauche");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
     break;
     case 3:
         if(parseInt(window.getComputedStyle(ennemi1).getPropertyValue("left")) === 650){
           move(ennemi1, "gauche");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
         else{
           move(ennemi1, "droite");
+          ennemi1.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
     break;
 }
@@ -134,33 +145,41 @@ switch (random) {
   case 0:
     if(parseInt(window.getComputedStyle(ennemi2).getPropertyValue("top")) === 0){
       move(ennemi2, "bas");
+      ennemi2.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
     }
     else{
       move(ennemi2, "haut");
+      ennemi2.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
     }
     break;
     case 1:
         if(parseInt(window.getComputedStyle(ennemi2).getPropertyValue("top")) === 650){
           move(ennemi2, "haut");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
         }
         else{
           move(ennemi2, "bas");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
         }
     break;
     case 2:
         if(parseInt(window.getComputedStyle(ennemi2).getPropertyValue("left")) === 0){
           move(ennemi2, "droite");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
         else{
           move(ennemi2, "gauche");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
     break;
     case 3:
         if(parseInt(window.getComputedStyle(ennemi2).getPropertyValue("left")) === 650){
           move(ennemi2, "gauche");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
         else{
           move(ennemi2, "droite");
+          ennemi2.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
     break;
 }
@@ -172,33 +191,41 @@ switch (random) {
   case 0:
     if(parseInt(window.getComputedStyle(ennemi3).getPropertyValue("top")) === 0){
       move(ennemi3, "bas");
+      ennemi3.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
     }
     else{
       move(ennemi3, "haut");
+      ennemi3.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
     }
     break;
     case 1:
         if(parseInt(window.getComputedStyle(ennemi3).getPropertyValue("top")) === 650){
           move(ennemi3, "haut");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
         }
         else{
           move(ennemi3, "bas");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
         }
     break;
     case 2:
         if(parseInt(window.getComputedStyle(ennemi3).getPropertyValue("left")) === 0){
           move(ennemi3, "droite");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
         else{
           move(ennemi3, "gauche");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
     break;
     case 3:
         if(parseInt(window.getComputedStyle(ennemi3).getPropertyValue("left")) === 650){
           move(ennemi3, "gauche");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
         else{
           move(ennemi3, "droite");
+          ennemi3.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
     break;
 }
@@ -210,33 +237,41 @@ switch (random) {
   case 0:
     if(parseInt(window.getComputedStyle(ennemi4).getPropertyValue("top")) === 0){
       move(ennemi4, "bas");
+      ennemi4.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
     }
     else{
       move(ennemi4, "haut");
+      ennemi4.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
     }
     break;
     case 1:
         if(parseInt(window.getComputedStyle(ennemi4).getPropertyValue("top")) === 650){
           move(ennemi4, "haut");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_haut.gif')"
         }
         else{
           move(ennemi4, "bas");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_bas.gif')"
         }
     break;
     case 2:
         if(parseInt(window.getComputedStyle(ennemi4).getPropertyValue("left")) === 0){
           move(ennemi4, "droite");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
         else{
           move(ennemi4, "gauche");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
     break;
     case 3:
         if(parseInt(window.getComputedStyle(ennemi4).getPropertyValue("left")) === 650){
           move(ennemi4, "gauche");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_gauche.gif')"
         }
         else{
           move(ennemi4, "droite");
+          ennemi4.style.background = "URL('/img/ennemi/ennemi_droite.gif')"
         }
     break;
 }
