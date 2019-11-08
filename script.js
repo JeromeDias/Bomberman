@@ -129,6 +129,7 @@ $(document).ready(function() {
     });
 
     // faire bouger l'ennemi dans une direction aléatoirement
+    // Ennemi n°1
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
@@ -174,7 +175,7 @@ $(document).ready(function() {
         break;
       }
     },1000)
-
+// Ennemi n°2
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
@@ -221,6 +222,7 @@ $(document).ready(function() {
       }
 
     },1000)
+    // Ennemi n°3
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
@@ -267,6 +269,7 @@ $(document).ready(function() {
       }
 
     },1000)
+    // Ennemi n°4
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
@@ -312,6 +315,8 @@ $(document).ready(function() {
         break;
       }
     },1000)
+
+    // fonction invulnérabilité et vies du héros
     let cooldown_hit = 0;
     let vie = 3;
     function contact_enemy() {
@@ -342,6 +347,7 @@ $(document).ready(function() {
               affiche_cd[1].classList.add('dis-none');
             },500)
             console.log('touché')
+            
             if(cooldown_hit = 1){
               vie -= 1;
               console.log(vie);
@@ -361,7 +367,7 @@ $(document).ready(function() {
     },100)
 
 
-
+// fonction utiliser bombe 
     function drop_bomb() {
       let nuub_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
       let nuub_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
@@ -390,6 +396,7 @@ $(document).ready(function() {
         let ex2value = document.getElementsByClassName('ex2');
         let enemy_temp = document.getElementsByClassName('enemy');
 
+// Hitbox de la bombe aux ennemis
         function hitbox(){
           for (var i = 0; i < ex2value.length; i++) {
             ex2value[i].style.left = nuub_x - 50 + "px";
@@ -417,7 +424,7 @@ $(document).ready(function() {
             }
           }
         }
-
+// fonction hitbox de la bombe au héros
         hitbox();
         function hitbox_hero(){
           for (var i = 0; i < ex2value.length; i++) {
@@ -447,6 +454,9 @@ $(document).ready(function() {
       },1000)
 
     }
+
+    // afficher la bombe
+
     let ie = 0;
     let cooldown_keyboard = 0;
     window.addEventListener('keydown', function (e) {
@@ -472,7 +482,7 @@ $(document).ready(function() {
       console.log(cooldown_keyboard);
 
     })
-    // Nouvel fonction
+// Nouvel fonction
     function endgame() {
       let numberenemy = document.getElementsByClassName('enemy')
       console.log('fuck');
@@ -493,6 +503,9 @@ $(document).ready(function() {
       endgame()
     },50)
   };
+
+  // Bouton start
+
   let start_butn = document.getElementById('start-button');
   start_butn.addEventListener('click',function(){
     let start_screen = document.getElementById('start-screen');
@@ -500,3 +513,11 @@ $(document).ready(function() {
     start()
   });
 })
+
+// Bouton pour rafraichir la page
+
+function refresh() {
+   window.location.reload(false); }
+
+// 
+

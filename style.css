@@ -256,3 +256,8 @@ footer{
 .coolGmod{
 	background: cyan;
 }
+
+#retry-button{
+  cursor : pointer;
+
+}
