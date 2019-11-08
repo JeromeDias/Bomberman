@@ -14,10 +14,14 @@
   <header>
     <h1>BomberMeuh: HardCore Edition</h1>
     <div class="enemy"></div>
+    <audio id="gamemusic" src="songs/sonjeu3.mp3" autoplay loop></audio>
   </header>
   <section>
     <div id="col-gauche" class="col-width">
-    <p>describe</p>
+      <p>Vies: </p>
+      <img id="life1" class="nombrevie1" src="img/Barres/vie.png" alt="vie">
+      <img id="life2" class="nombrevie2" src="img/Barres/vie.png" alt="vie">
+      <img id="life3" class="nombrevie3" src="img/Barres/vie.png" alt="vie">
     </div>
     <div id="ecran" class="cadre">
       <div id="retry-screen" class="dis-none">
@@ -30,7 +34,7 @@
                     <img id="gameover"src="img/Gameover/game_over.gif" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
-                    <p id="retry-button" onclick="refresh()">Retry</p>
+                    <p id="retry-button1" class="retry-reload">Retry</p>
                   </div>
               </div>
             </div>
@@ -40,20 +44,31 @@
               <div id="retry-content">
                   <div class="content-screen-retry">
                     <p>You win !</p>
-                    <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
+                    <img id="gameover1"src="img/win/podium.png" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
-                    <p id="retry-button">Retry</p>
+                    <p id="retry-button2" class="retry-reload">Retry</p>
                   </div>
               </div>
             </div>
       </div>
+      <div id="suicide-screen" class="dis-none">
+        <div id="suicide">
+            <div id="retry-content">
+                <div class="content-screen-retry">
+                  <p>Suicide squad !</p>
+                  <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
+                </div>
+                <div class="content-screen-retry">
+                  <p id="retry-button3" class="retry-reload">Retry</p>
+                </div>
+            </div>
+          </div>
+    </div>
       <div id="start-screen">
           <div id="start">
               <div id="retry-content">
                   <div class="content-screen-retry">
-                    <p>Welcome</p>
-                    <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
                     <p id="start-button" class="custom-cursor">Start</p>
@@ -66,20 +81,27 @@
       <div id="ennemi2" class="enemy"></div>
       <div id="ennemi3" class="enemy"></div>
       <div id="ennemi4" class="enemy"></div>
+      <div id="ennemi5" class="enemy"></div>
+      <div id="ennemi6" class="enemy"></div>
     </div>
     <div id="col-droite" class="col-width">
-      <p>cooldown</p>
-      <div id="cooldown-nav">
-        <div class="affiche-cd dis-none">
-          <p id="cooldown-dropBomb" class="coolBomb"></p>
-          <p id="time-cooldown-dropBomb" class="times"></p>
-        </div>
-        <div class="affiche-cd dis-none">
-          <p id="cooldown-gModeAfterHit" class="coolGmod"></p>
-          <p id="time-cooldown-gModeAfterHit" class="times"></p>
+      <div class="box-titre">
+      <p>Cooldown</p>
+      </div>
+      <div class="box-cooldown">
+        <div id="cooldown-nav">
+          <div class="affiche-cd dis-none">
+            <p id="cooldown-dropBomb" class="coolBomb"></p>
+            <p id="time-cooldown-dropBomb" class="times"></p>
+          </div>
+          <div class="affiche-cd dis-none">
+            <p id="cooldown-gModeAfterHit" class="coolGmod"></p>
+            <p id="time-cooldown-gModeAfterHit" class="times"></p>
+          </div>
         </div>
       </div>
     </div>
+    
   </section>
   <footer>
     <p>Chef de projet: Jérôme</p>

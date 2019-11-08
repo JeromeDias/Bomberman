@@ -1,4 +1,12 @@
 $(document).ready(function() {
+  function changemusiclose(){
+ let musicg = document.getElementById('gamemusic')
+ musicg.src = 'songs/gameover.mp3'
+  }
+  function changemusicwin(){
+    let musicg = document.getElementById('gamemusic')
+    musicg.src = 'songs/gamewin.mp3'
+     }
   //fonction Start
   function start(){
     console.log('heelo');
@@ -12,6 +20,8 @@ $(document).ready(function() {
     let ennemi2 = document.getElementById("ennemi2");
     let ennemi3 = document.getElementById("ennemi3");
     let ennemi4 = document.getElementById("ennemi4");
+    let ennemi5 = document.getElementById("ennemi5");
+    let ennemi6 = document.getElementById("ennemi6");
 
     // fonction qui permet de bouger un élément dans une direction
     function move(element, direction) {
@@ -316,6 +326,98 @@ $(document).ready(function() {
       }
     },1000)
 
+    setInterval(function(){
+      let random = getRandomInt(4);
+      switch (random) {
+        case 0:
+        if(parseInt(window.getComputedStyle(ennemi5).getPropertyValue("top")) === 0){
+          move(ennemi5, "bas");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+        }
+        else{
+          move(ennemi5, "haut");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+        }
+        break;
+        case 1:
+        if(parseInt(window.getComputedStyle(ennemi5).getPropertyValue("top")) === 650){
+          move(ennemi5, "haut");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+        }
+        else{
+          move(ennemi5, "bas");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+        }
+        break;
+        case 2:
+        if(parseInt(window.getComputedStyle(ennemi5).getPropertyValue("left")) === 0){
+          move(ennemi5, "droite");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+        }
+        else{
+          move(ennemi5, "gauche");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+        }
+        break;
+        case 3:
+        if(parseInt(window.getComputedStyle(ennemi5).getPropertyValue("left")) === 650){
+          move(ennemi5, "gauche");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+        }
+        else{
+          move(ennemi5, "droite");
+          ennemi5.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+        }
+        break;
+      }
+    },1000)
+
+    setInterval(function(){
+      let random = getRandomInt(4);
+      switch (random) {
+        case 0:
+        if(parseInt(window.getComputedStyle(ennemi6).getPropertyValue("top")) === 0){
+          move(ennemi6, "bas");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+        }
+        else{
+          move(ennemi6, "haut");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+        }
+        break;
+        case 1:
+        if(parseInt(window.getComputedStyle(ennemi6).getPropertyValue("top")) === 650){
+          move(ennemi6, "haut");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+        }
+        else{
+          move(ennemi6, "bas");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+        }
+        break;
+        case 2:
+        if(parseInt(window.getComputedStyle(ennemi6).getPropertyValue("left")) === 0){
+          move(ennemi6, "droite");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+        }
+        else{
+          move(ennemi6, "gauche");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+        }
+        break;
+        case 3:
+        if(parseInt(window.getComputedStyle(ennemi6).getPropertyValue("left")) === 650){
+          move(ennemi6, "gauche");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+        }
+        else{
+          move(ennemi6, "droite");
+          ennemi6.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+        }
+        break;
+      }
+    },1000)
+
     // fonction invulnérabilité et vies du héros
     let cooldown_hit = 0;
     let vie = 3;
@@ -347,15 +449,29 @@ $(document).ready(function() {
               affiche_cd[1].classList.add('dis-none');
             },500)
             console.log('touché')
-            
+
             if(cooldown_hit = 1){
-              vie -= 1;
+              vie -= 1;            
               console.log(vie);
+              if (vie == 2){
+                let life3 = document.getElementById('life3');
+                life3.src = "img/Barres/vie_perdu.png"
+              }
+              if (vie == 1){
+                let life2 = document.getElementById('life2');
+                life2.src = "img/Barres/vie_perdu.png"
+              }
+              if (vie == 0){
+                let life1 = document.getElementById('life1');
+                life1.src = "img/Barres/vie_perdu.png"
+              }
               if(vie == 0){
                 console.log('game over')
                 let retry_screen = document.getElementById('retry-screen');
                 retry_screen.classList.remove('dis-none')
+                changemusiclose()
               }
+              
             }
           }
         }
@@ -376,6 +492,9 @@ $(document).ready(function() {
       let nuub_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
       let nuub_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
       let screen = document.getElementById('ecran');
+      let bomb_noise = document.createElement('audio')
+      bomb_noise.setAttribute('src', 'songs/bruitbombe.mp3')
+      bomb_noise.setAttribute('autoplay','')
       let bomba = document.createElement('div');
       bomba.classList.add('bombashit')
       screen.appendChild(bomba)
@@ -417,15 +536,15 @@ $(document).ready(function() {
               let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
               console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
               if (enemy_pos_top < ex2_pos_top + ex2_width && enemy_pos_top + enemy_width > ex2_pos_top && enemy_pos_left < ex2_pos_left + ex2_height && enemy_height + enemy_pos_left > ex2_pos_left) {
-                console.log('gg')
+                console.log('ennemi touché')
                 enemy_temp[i].remove();
 
               }
             }
           }
         }
-// fonction hitbox de la bombe au héros
         hitbox();
+        // fonction hitbox de la bombe au héros
         function hitbox_hero(){
           for (var i = 0; i < ex2value.length; i++) {
             let hero_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
@@ -442,8 +561,11 @@ $(document).ready(function() {
             let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
             let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
             console.log(ex2_width, ex2_height);
-            if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_x < ex2_pos_right + ex2_height && hero_height + hero_x > ex2_pos_right) {
-              console.log('go');
+            if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_pos_right < ex2_pos_right + ex2_height && hero_height + hero_pos_right > ex2_pos_right) {
+              console.log('héros touché');
+                let suicide_screen = document.getElementById('suicide-screen')
+                suicide_screen.classList.remove('dis-none')
+                changemusiclose()
             }
           }
         }
@@ -493,8 +615,9 @@ $(document).ready(function() {
           console.log(numberenemy);
           let win_screen = document.getElementById('win-screen');
           win_screen.classList.remove('dis-none')
+          // changemusiclose(); BUG MUSIQUE
         }
-
+        
       }
 
 
@@ -504,7 +627,7 @@ $(document).ready(function() {
     },50)
   };
 
-  // Bouton start
+  // Bouton start et recommencer
 
   let start_butn = document.getElementById('start-button');
   start_butn.addEventListener('click',function(){
@@ -512,12 +635,31 @@ $(document).ready(function() {
     start_screen.classList.add('dis-none');
     start()
   });
+  let retry_butn1 = document.getElementById('retry-button1');
+  retry_butn1.addEventListener('click',function(){
+    let retry_screen = document.getElementById('retry-screen');
+    retry_screen.classList.add('dis-none');
+    window.location.reload();
+  });
+  let retry_butn2 = document.getElementById('retry-button2');
+  retry_butn2.addEventListener('click',function(){
+    let win_screen = document.getElementById('win-screen');
+    win_screen.classList.add('dis-none');
+    window.location.reload();
+  });
+  let retry_butn3 = document.getElementById('retry-button3');
+  retry_butn3.addEventListener('click',function(){
+    let suicide_screen = document.getElementById('suicide-screen');
+    suicide_screen.classList.add('dis-none');
+    window.location.reload();
+  });
+
+
+
+
+  // fin du jeu
 })
 
-// Bouton pour rafraichir la page
 
-function refresh() {
-   window.location.reload(false); }
 
-// 
 

@@ -23,13 +23,24 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+header{
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   line-height: 1;
-  background-image: url(img/Background/back_2.jpg);
+  background-image: url(img/Background/back_miroir.svg);
   background-size : cover;
   background-position: center;
 
 }
+
+/* MISE EN PAGE DU TEXTE */
+
 ol, ul {
 	list-style: none;
 }
@@ -50,14 +61,16 @@ table {
 	border-spacing: 0;
 }
 
+/* CADRE DU JEU */
 .cadre{
   height: 700px;
   width: 700px;
   background-image: url(img/Background/background3.png);
   border: solid 2px grey;
   position: relative;
+  overflow: hidden;
 }
-
+/* HEROS */
 #carre{
   height: 50px;
   width: 50px;
@@ -66,7 +79,7 @@ table {
   top: 300px;
   left: 300px;
 }
-
+/* ENNEMIS */
 #ennemi1{
   height: 50px;
   width: 50px;
@@ -107,6 +120,36 @@ table {
   right: 50px;
 }
 
+#ennemi5{
+  height: 50px;
+  width: 50px;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
+  position: absolute;
+  bottom: 150px;
+  right: 350px;
+}
+
+#ennemi6{
+  height: 50px;
+  width: 50px;
+  background-image: url(img/ennemi/ennemi_fixe.png);
+  background-size: cover;
+  position: absolute;
+  top: 150px; 
+  right: 350px;
+}
+
+.box-titre{
+  height: 100%;
+}
+
+.box-cooldown{
+  height: 200px;
+}
+
+
+/* BOMBES */
 .bombashit{
   position: absolute;
   height: 50px;
@@ -114,6 +157,8 @@ table {
   background-image: url(img/bombe/bombe.gif);
   background-size: cover;
 }
+
+/* EXPLOSION */
 .explosion{
   position: absolute;
   height: 50px;
@@ -132,21 +177,44 @@ table {
   background-image: url(img/bombe/explosion-gif-png-3.gif);
   background-size: cover;
 }
+/* DISPLAY NONE */
 .dis-none{
   display: none;
 }
-#retry{
-  position: absolute;
+
+#start{
+	position: absolute;
   z-index: 10000;
   width: 100%;
   height: 100%;
-  background-image: url(img/Background/background_gameover.jpg);
+  background-image: url(img/Background/plaquette.png);
   display: flex;
   justify-content: center;
   align-items: center;
   background-size: cover;
   background-position: center;
 }
+
+.custom-cursor{
+	cursor: pointer;
+}
+
+
+section{
+  display: flex;
+  justify-content: space-around;
+	align-items: center;
+  height: 93vh;
+
+}
+
+
+.col-width{
+  width: 300px;
+
+}
+
+/* WIN */
 
 #win{
   position: absolute;
@@ -159,8 +227,22 @@ table {
   align-items: center;
   background-size: cover;
 }
-#start{
-	position: absolute;
+
+#suicide{
+  position: absolute;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background-image: url(img/Background/background_gameover2.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+/* GAME OVER */
+
+#retry{
+  position: absolute;
   z-index: 10000;
   width: 100%;
   height: 100%;
@@ -179,56 +261,38 @@ table {
   align-items: center;
   flex-direction: column;
 }
-.custom-cursor{
-	cursor: crosshair;
-}
+
 .content-screen-retry{
   width: 100%;
-  height: 200px;
+  
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
-section{
-  display: flex;
-  justify-content: space-around;
-	align-items: center;
-  height: 93vh;
 
-}
-header{
-  height: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-footer{
-  height: 3vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.col-width{
-  width: 300px;
-  height: 100%;
-}
 #gameover{
   width: auto;
   height: 100%;
   margin-top: 5px;
 }
-
-.content-screen-retry{
+#gameover1{
+  width: auto;
+  height: 75%;
+  margin-top: 5px;
+}
+  #col-droite{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+#col-gauche{
   display: flex;
-  flex-direction: column;
-  text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-#col-droite{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
+/* COOLDOWN */
 #cooldown-nav{
 	display: flex;
 	justify-content: space-around;
@@ -247,17 +311,59 @@ footer{
 	border: 2px solid black;
 }
 .times{
-	background: black;
+	background-image: url(img/Barres/carreNR.gif);
 	opacity: 0.5;
 }
+/* COULEUR COOLDOWN */
 .coolBomb{
-	background: yellow;
+  background : url(img/Barres/bombe_temp.gif);
+
 }
 .coolGmod{
-	background: cyan;
+  background : url(img/Barres/LEbibi.gif);
 }
-
-#retry-button{
+/* BOUTON RETRY */
+#retry-button1, #retry-button2, #retry-button3{
   cursor : pointer;
 
+}
+/* NOMBRE DE VIES */
+.nombrevie1{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+.nombrevie2{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+.nombrevie3{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+/* NOMBRE DE BOMBES */
+.nombrebombe1{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+.nombrebombe2{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+.nombrebombe3{
+  width: 20%;
+  padding-top: 20px;
+  display: block;
+}
+
+/* FOOTER */
+footer{
+  height: 3vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
