@@ -28,7 +28,7 @@ body {
   background-image: url(img/Background/back_2.jpg);
   background-size : cover;
   background-position: center;
-  
+
 }
 ol, ul {
 	list-style: none;
@@ -62,7 +62,6 @@ table {
   height: 50px;
   width: 50px;
   background-image: url(img/hero/hero_fixe.png);
-  
   position: absolute;
   top: 300px;
   left: 300px;
@@ -141,7 +140,7 @@ table {
   z-index: 10000;
   width: 100%;
   height: 100%;
-  background-image: url(/img/Background/background_gameover.jpg);
+  background-image: url(img/Background/background_gameover.jpg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,11 +153,23 @@ table {
   z-index: 10000;
   width: 100%;
   height: 100%;
-  background-image: url(/img/Background/background_win.jpg);
+  background-image: url(img/Background/background_win.jpg);
   display: flex;
   justify-content: center;
   align-items: center;
   background-size: cover;
+}
+#start{
+	position: absolute;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background-image: url(img/Background/background_gameover.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
 }
 #retry-content{
   width: 400px;
@@ -167,6 +178,9 @@ table {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.custom-cursor{
+	cursor: crosshair;
 }
 .content-screen-retry{
   width: 100%;
@@ -177,7 +191,8 @@ table {
 }
 section{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+	align-items: center;
   height: 93vh;
 
 }
@@ -194,8 +209,8 @@ footer{
   align-items: center;
 }
 .col-width{
-  width: 200px;
-  height: 100% ;
+  width: 300px;
+  height: 100%;
 }
 #gameover{
   width: auto;
@@ -208,4 +223,36 @@ footer{
   flex-direction: column;
   text-align: center;
 }
-
+#col-droite{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+#cooldown-nav{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 5px;
+}
+.affiche-cd{
+	position: relative;
+	height: 100px;
+	width: 100px;
+	margin: 5px;
+}
+#cooldown-dropBomb, #time-cooldown-dropBomb, #cooldown-gModeAfterHit, #time-cooldown-gModeAfterHit{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: 2px solid black;
+}
+.times{
+	background: black;
+	opacity: 0.5;
+}
+.coolBomb{
+	background: yellow;
+}
+.coolGmod{
+	background: cyan;
+}

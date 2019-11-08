@@ -27,7 +27,7 @@
                     <p>Game Over !<br><br>
                       Fatality !
                     </p>
-                    <img id="gameover"src="/img/Gameover/gameover.gif" alt="gameover">
+                    <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
                     <p id="retry-button">Retry</p>
@@ -40,10 +40,23 @@
               <div id="retry-content">
                   <div class="content-screen-retry">
                     <p>You win !</p>
-                    <img id="gameover"src="/img/Gameover/gameover" alt="gameover">
+                    <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
                   </div>
                   <div class="content-screen-retry">
                     <p id="retry-button">Retry</p>
+                  </div>
+              </div>
+            </div>
+      </div>
+      <div id="start-screen">
+          <div id="start">
+              <div id="retry-content">
+                  <div class="content-screen-retry">
+                    <p>Welcome</p>
+                    <img id="gameover"src="img/Gameover/gameover.gif" alt="gameover">
+                  </div>
+                  <div class="content-screen-retry">
+                    <p id="start-button" class="custom-cursor">Start</p>
                   </div>
               </div>
             </div>
@@ -56,6 +69,16 @@
     </div>
     <div id="col-droite" class="col-width">
       <p>cooldown</p>
+      <div id="cooldown-nav">
+        <div class="affiche-cd dis-none">
+          <p id="cooldown-dropBomb" class="coolBomb"></p>
+          <p id="time-cooldown-dropBomb" class="times"></p>
+        </div>
+        <div class="affiche-cd dis-none">
+          <p id="cooldown-gModeAfterHit" class="coolGmod"></p>
+          <p id="time-cooldown-gModeAfterHit" class="times"></p>
+        </div>
+      </div>
     </div>
   </section>
   <footer>
@@ -63,8 +86,8 @@
     <p>Developper: Vecteur</p>
     <p>Designer: MySQL-Romain</p>
   </footer>
-  
-  
+
+
   <script src="script.js"></script>
 </body>
 </html>
