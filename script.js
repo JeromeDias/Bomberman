@@ -1,15 +1,40 @@
 $(document).ready(function() {
   function changemusiclose(){
- let musicg = document.getElementById('gamemusic')
- musicg.src = 'songs/gameover.mp3'
+ let musicgo = document.createElement('audio');
+ musicgo.src = 'songs/loosesound.wav';
+ musicgo.setAttribute('autoplay','');
+ setTimeout(function(){
+   let youl_voice = document.createElement('audio')
+   youl_voice.src = 'songs/you.wav';
+   youl_voice.setAttribute('autoplay','');
+ },1000);
+ setTimeout(function () {
+   let loose_voice = document.createElement('audio')
+   loose_voice.src = 'songs/loose.wav';
+   loose_voice.setAttribute('autoplay','');
+ },2000);
   }
   function changemusicwin(){
-    let musicg = document.getElementById('gamemusic')
-    musicg.src = 'songs/gamewin.mp3'
-     }
+    let musicw = document.createElement('audio');
+    musicw.src = 'songs/winsound.wav';
+    musicw.setAttribute('autoplay','');
+    setTimeout(function(){
+      let youw_voice = document.createElement('audio')
+      youw_voice.src = 'songs/you.wav';
+      youw_voice.setAttribute('autoplay','');
+    },1000);
+    setTimeout(function () {
+      let win_voice = document.createElement('audio')
+      win_voice.src = 'songs/win.wav';
+      win_voice.setAttribute('autoplay','');
+    },2000);
+  }
+  let score = 0;
+  setInterval(function(){
+    $("#scoreboard").html(score);
+  })
   //fonction Start
   function start(){
-    console.log('heelo');
     //chosit un nombre aléatoire
     function getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
@@ -22,8 +47,57 @@ $(document).ready(function() {
     let ennemi4 = document.getElementById("ennemi4");
     let ennemi5 = document.getElementById("ennemi5");
     let ennemi6 = document.getElementById("ennemi6");
-
-    // fonction qui permet de bouger un élément dans une direction
+    let obstacleAll = document.getElementsByClassName('obstacle');
+    function hero_obst_left() {
+      let carre_pos_left = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+      let carre_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+        for (var i = 0; i < obstacleAll.length; i++) {
+          let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+          let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+          let obst_pos_right = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("right"));
+          let obst_pos_bottom = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("bottom"));
+          if (obst_pos_left < carre_pos_left + 50 && obst_pos_left + 50 > carre_pos_left && obst_pos_top < carre_pos_top + 50 && obst_pos_top + 50 > carre_pos_top ) {
+            let nc_pos_left = obst_pos_left + 50;
+            carre.style.left = nc_pos_left + "px";
+          }
+        }
+    }
+    function hero_obst_right() {
+      let carre_pos_left = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+      let carre_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+      for (var i = 0; i < obstacleAll.length; i++) {
+        let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+        let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+        if (obst_pos_left < carre_pos_left + 50 && obst_pos_left + 50 > carre_pos_left && obst_pos_top < carre_pos_top + 50 && obst_pos_top + 50 > carre_pos_top ) {
+          let nc_pos_right = obst_pos_left - 50;
+          carre.style.left = nc_pos_right + "px";
+        }
+      }
+    }
+    function hero_obst_bot() {
+      let carre_pos_left = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+      let carre_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+        for (var i = 0; i < obstacleAll.length; i++) {
+          let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+          let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+          if (obst_pos_left < carre_pos_left + 50 && obst_pos_left + 50 > carre_pos_left && obst_pos_top < carre_pos_top + 50 && obst_pos_top + 50 > carre_pos_top ) {
+            let nc_pos_bottom = obst_pos_top - 50;
+            carre.style.top = nc_pos_bottom + "px";
+          }
+        }
+    }
+    function hero_obst_top() {
+      let carre_pos_left = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
+      let carre_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
+        for (var i = 0; i < obstacleAll.length; i++) {
+          let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+          let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+          if (obst_pos_left < carre_pos_left + 50 && obst_pos_left + 50 > carre_pos_left && obst_pos_top < carre_pos_top + 50 && obst_pos_top + 50 > carre_pos_top ) {
+            let nc_pos_top = obst_pos_top + 50;
+            carre.style.top = nc_pos_top + "px";
+          }
+        }
+    }
     function move(element, direction) {
       let top_element = parseInt(
         window.getComputedStyle(element).getPropertyValue("top")
@@ -72,36 +146,379 @@ $(document).ready(function() {
       }
     }
 
-    // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
+    //generateur d'ENNEMIS
+    function enemy1(name){
+      this.name = name;
+        let screen1 = document.getElementById('ecran');
+        let n_enemy1 = document.createElement('div');
+        n_enemy1.setAttribute('class','enemy');
+        n_enemy1.classList.add("epos1")
+        screen1.appendChild(n_enemy1);
+        function epos1_obst_top() {
+          let epos1_pos_left = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left"));
+          let epos1_pos_top = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos1_pos_left + 50 && obst_pos_left + 50 > epos1_pos_left && obst_pos_top < epos1_pos_top + 50 && obst_pos_top + 50 > epos1_pos_top ) {
+                let nc_pos_top = obst_pos_top + 50;
+                n_enemy1.style.top = nc_pos_top + "px";
+              }
+            }
+        }
+        function epos1_obst_bot() {
+          let epos1_pos_left = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left"));
+          let epos1_pos_top = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos1_pos_left + 50 && obst_pos_left + 50 > epos1_pos_left && obst_pos_top < epos1_pos_top + 50 && obst_pos_top + 50 > epos1_pos_top ) {
+                let nc_pos_bottom = obst_pos_top - 50;
+                n_enemy1.style.top = nc_pos_bottom + "px";
+              }
+            }
+        }
+        function epos1_obst_left() {
+          let epos1_pos_left = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left"));
+          let epos1_pos_top = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos1_pos_left + 50 && obst_pos_left + 50 > epos1_pos_left && obst_pos_top < epos1_pos_top + 50 && obst_pos_top + 50 > epos1_pos_top ) {
+                let nc_pos_left = obst_pos_left + 50;
+                n_enemy1.style.left = nc_pos_left + "px";
+              }
+            }
+        }
+        function epos1_obst_right() {
+          let epos1_pos_left = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left"));
+          let epos1_pos_top = parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos1_pos_left + 50 && obst_pos_left + 50 > epos1_pos_left && obst_pos_top < epos1_pos_top + 50 && obst_pos_top + 50 > epos1_pos_top ) {
+                let nc_pos_right = obst_pos_left - 50;
+                n_enemy1.style.left = nc_pos_right + "px";
+              }
+            }
+        }
 
+      this.moveAuto1 = setInterval(function(){
+            let random = getRandomInt(4);
+            switch (random) {
+              case 0:
+              if(parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top")) === 0){
+                move(n_enemy1, "bas");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                epos1_obst_bot();
+              }
+              else{
+                move(n_enemy1, "haut");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                epos1_obst_top();
+              }
+              break;
+              case 1:
+              if(parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("top")) === 650){
+                move(n_enemy1, "haut");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                epos1_obst_top();
+              }
+              else{
+                move(n_enemy1, "bas");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                epos1_obst_bot();
+              }
+              break;
+              case 2:
+              if(parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left")) === 0){
+                move(n_enemy1, "droite");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                epos1_obst_right();
+              }
+              else{
+                move(n_enemy1, "gauche");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                epos1_obst_left();
+              }
+              break;
+              case 3:
+              if(parseInt(window.getComputedStyle(n_enemy1).getPropertyValue("left")) === 650){
+                move(n_enemy1, "gauche");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                epos1_obst_left();
+              }
+              else{
+                move(n_enemy1, "droite");
+                n_enemy1.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                epos1_obst_right();
+              }
+              break;
+            }
+          },1000)
+    }
+    function enemy3(name){
+      this.name = name;
+        let screen3 = document.getElementById('ecran');
+        let n_enemy3 = document.createElement('div');
+        n_enemy3.setAttribute('class','enemy');
+        n_enemy3.classList.add('epos3')
+        screen3.appendChild(n_enemy3);
+        function epos3_obst_top() {
+          let epos3_pos_left = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left"));
+          let epos3_pos_top = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos3_pos_left + 50 && obst_pos_left + 50 > epos3_pos_left && obst_pos_top < epos3_pos_top + 50 && obst_pos_top + 50 > epos3_pos_top ) {
+                let nc_pos_top = obst_pos_top + 50;
+                n_enemy3.style.top = nc_pos_top + "px";
+              }
+            }
+        }
+        function epos3_obst_bot() {
+          let epos3_pos_left = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left"));
+          let epos3_pos_top = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos3_pos_left + 50 && obst_pos_left + 50 > epos3_pos_left && obst_pos_top < epos3_pos_top + 50 && obst_pos_top + 50 > epos3_pos_top ) {
+                let nc_pos_bottom = obst_pos_top - 50;
+                n_enemy3.style.top = nc_pos_bottom + "px";
+              }
+            }
+        }
+        function epos3_obst_left() {
+          let epos3_pos_left = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left"));
+          let epos3_pos_top = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos3_pos_left + 50 && obst_pos_left + 50 > epos3_pos_left && obst_pos_top < epos3_pos_top + 50 && obst_pos_top + 50 > epos3_pos_top ) {
+                let nc_pos_left = obst_pos_left + 50;
+                n_enemy3.style.left = nc_pos_left + "px";
+              }
+            }
+        }
+        function epos3_obst_right() {
+          let epos3_pos_left = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left"));
+          let epos3_pos_top = parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos3_pos_left + 50 && obst_pos_left + 50 > epos3_pos_left && obst_pos_top < epos3_pos_top + 50 && obst_pos_top + 50 > epos3_pos_top ) {
+                let nc_pos_right = obst_pos_left - 50;
+                n_enemy3.style.left = nc_pos_right + "px";
+              }
+            }
+        }
+        this.moveAuto3 = setInterval(function(){
+              let random = getRandomInt(4);
+              switch (random) {
+                case 0:
+                if(parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top")) === 0){
+                  move(n_enemy3, "bas");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                  epos3_obst_bot()
+                }
+                else{
+                  move(n_enemy3, "haut");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                  epos3_obst_top()
+                }
+                break;
+                case 1:
+                if(parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("top")) === 650){
+                  move(n_enemy3, "haut");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                  epos3_obst_top()
+                }
+                else{
+                  move(n_enemy3, "bas");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                  epos3_obst_bot()
+                }
+                break;
+                case 2:
+                if(parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left")) === 0){
+                  move(n_enemy3, "droite");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                  epos3_obst_right()
+                }
+                else{
+                  move(n_enemy3, "gauche");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                  epos3_obst_left()
+                }
+                break;
+                case 3:
+                if(parseInt(window.getComputedStyle(n_enemy3).getPropertyValue("left")) === 650){
+                  move(n_enemy3, "gauche");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                  epos3_obst_left()
+                }
+                else{
+                  move(n_enemy3, "droite");
+                  n_enemy3.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                  epos3_obst_right()
+                }
+                break;
+              }
+            },1000)
+    }
+    function enemy2(name){
+      this.name = name;
+        let screen2 = document.getElementById('ecran');
+        let n_enemy2 = document.createElement('div');
+        n_enemy2.setAttribute('class','enemy');
+        n_enemy2.classList.add('epos2')
+        screen2.appendChild(n_enemy2);
+        function epos2_obst_top() {
+          let epos2_pos_left = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left"));
+          let epos2_pos_top = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos2_pos_left + 50 && obst_pos_left + 50 > epos2_pos_left && obst_pos_top < epos2_pos_top + 50 && obst_pos_top + 50 > epos2_pos_top ) {
+                let nc_pos_top = obst_pos_top + 50;
+                n_enemy2.style.top = nc_pos_top + "px";
+              }
+            }
+        }
+        function epos2_obst_bot() {
+          let epos2_pos_left = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left"));
+          let epos2_pos_top = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos2_pos_left + 50 && obst_pos_left + 50 > epos2_pos_left && obst_pos_top < epos2_pos_top + 50 && obst_pos_top + 50 > epos2_pos_top ) {
+                let nc_pos_bottom = obst_pos_top - 50;
+                n_enemy2.style.top = nc_pos_bottom + "px";
+              }
+            }
+        }
+        function epos2_obst_left() {
+          let epos2_pos_left = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left"));
+          let epos2_pos_top = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos2_pos_left + 50 && obst_pos_left + 50 > epos2_pos_left && obst_pos_top < epos2_pos_top + 50 && obst_pos_top + 50 > epos2_pos_top ) {
+                let nc_pos_left = obst_pos_left + 50;
+                n_enemy2.style.left = nc_pos_left + "px";
+              }
+            }
+        }
+        function epos2_obst_right() {
+          let epos2_pos_left = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left"));
+          let epos2_pos_top = parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top"));
+            for (var i = 0; i < obstacleAll.length; i++) {
+              let obst_pos_top = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("top"));
+              let obst_pos_left = parseInt(window.getComputedStyle(obstacleAll[i]).getPropertyValue("left"));
+              if (obst_pos_left < epos2_pos_left + 50 && obst_pos_left + 50 > epos2_pos_left && obst_pos_top < epos2_pos_top + 50 && obst_pos_top + 50 > epos2_pos_top ) {
+                let nc_pos_right = obst_pos_left - 50;
+                n_enemy2.style.left = nc_pos_right + "px";
+              }
+            }
+        }
+        this.moveAuto2 = setInterval(function(){
+              let random = getRandomInt(4);
+              switch (random) {
+                case 0:
+                if(parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top")) === 0){
+                  move(n_enemy2, "bas");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                  epos2_obst_bot()
+                }
+                else{
+                  move(n_enemy2, "haut");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                  epos2_obst_top()
+                }
+                break;
+                case 1:
+                if(parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("top")) === 650){
+                  move(n_enemy2, "haut");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_haut.gif')"
+                  epos2_obst_top()
+                }
+                else{
+                  move(n_enemy2, "bas");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_bas.gif')"
+                  epos2_obst_bot()
+                }
+                break;
+                case 2:
+                if(parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left")) === 0){
+                  move(n_enemy2, "droite");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                  epos2_obst_right()
+                }
+                else{
+                  move(n_enemy2, "gauche");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                  epos2_obst_left()
+                }
+                break;
+                case 3:
+                if(parseInt(window.getComputedStyle(n_enemy2).getPropertyValue("left")) === 650){
+                  move(n_enemy2, "gauche");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_gauche.gif')"
+                  epos2_obst_left()
+                }
+                else{
+                  move(n_enemy2, "droite");
+                  n_enemy2.style.background = "URL('img/ennemi/ennemi_droite.gif')"
+                  epos2_obst_right()
+                }
+                break;
+              }
+            },1000)
+
+    }
+    setInterval(function(){
+      let new_enm1 = new enemy1('topleftEnemy')
+      let new_enm2 = new enemy2('bottomleftEnemy')
+      let new_enm3 = new enemy3('toprightEnemy')
+    },10000)
+    // event listener pour écouter les touches du clavier, et bouger le carré en fonction de ces touches
+    //heromove
     window.addEventListener("keydown", function(event) {
       switch (event.keyCode) {
         //haut
         case 38:
+        event.preventDefault();
         //code quand on va en haut
         move(carre, "haut");
         carre.style.background = "URL('img/hero/hero_haut.gif')"
+        hero_obst_top()
         break;
 
         //droite
         case 39:
+        event.preventDefault();
         //code quand on va à droite
         move(carre, "droite");
         carre.style.background = "URL('img/hero/hero_droite.gif')"
+        hero_obst_right()
         break;
 
         //bas
         case 40:
+        event.preventDefault();
         move(carre, "bas");
         carre.style.background = "URL('img/hero/hero_bas.gif')"
+        hero_obst_bot()
         //code quand on va à bas
         break;
 
         //gauche
         case 37:
         //code quand on va à gauche
+        event.preventDefault();
         move(carre, "gauche");
         carre.style.background = "URL('img/hero/hero_gauche.gif')"
+        hero_obst_left()
         break;
       }
     });
@@ -448,11 +865,9 @@ $(document).ready(function() {
               cooldown_hit = 0;
               affiche_cd[1].classList.add('dis-none');
             },500)
-            console.log('touché')
 
             if(cooldown_hit = 1){
-              vie -= 1;            
-              console.log(vie);
+              vie -= 1;
               if (vie == 2){
                 let life3 = document.getElementById('life3');
                 life3.src = "img/Barres/vie_perdu.png"
@@ -466,12 +881,11 @@ $(document).ready(function() {
                 life1.src = "img/Barres/vie_perdu.png"
               }
               if(vie == 0){
-                console.log('game over')
                 let retry_screen = document.getElementById('retry-screen');
                 retry_screen.classList.remove('dis-none')
                 changemusiclose()
               }
-              
+
             }
           }
         }
@@ -483,7 +897,7 @@ $(document).ready(function() {
     },100)
 
 
-// fonction utiliser bombe 
+// fonction utiliser bombe
     function drop_bomb() {
       let nuub_x = parseInt(window.getComputedStyle(carre).getPropertyValue("left"));
       let nuub_pos_top = parseInt(window.getComputedStyle(carre).getPropertyValue("top"));
@@ -526,7 +940,6 @@ $(document).ready(function() {
             let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
             let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
             let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
-            console.log(ex2_width, ex2_height);
             for (var i = 0; i < enemy_temp.length; i++) {
               let enemy_pos_left = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("left"));
               let enemy_pos_bottom = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("bottom"));
@@ -534,10 +947,9 @@ $(document).ready(function() {
               let enemy_height = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("height"));
               let enemy_pos_right = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("right"));
               let enemy_pos_top = parseInt(window.getComputedStyle(enemy_temp[i]).getPropertyValue("top"));
-              console.log(ex2_pos_left, enemy_pos_left, ex2_pos_bottom, enemy_pos_bottom, ex2_pos_top, enemy_pos_top, ex2_pos_right, enemy_pos_right);
               if (enemy_pos_top < ex2_pos_top + ex2_width && enemy_pos_top + enemy_width > ex2_pos_top && enemy_pos_left < ex2_pos_left + ex2_height && enemy_height + enemy_pos_left > ex2_pos_left) {
-                console.log('ennemi touché')
                 enemy_temp[i].remove();
+                score += 2;
 
               }
             }
@@ -553,16 +965,13 @@ $(document).ready(function() {
             let hero_pos_right = parseInt(window.getComputedStyle(carre).getPropertyValue("right"));
             let hero_width = parseInt(window.getComputedStyle(carre).getPropertyValue("width"))
             let hero_height = parseInt(window.getComputedStyle(carre).getPropertyValue("height"))
-            console.log(hero_pos_top, hero_x, hero_y, hero_pos_right, hero_width, hero_height)
             let ex2_pos_left = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("left"));
             let ex2_pos_bottom = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("bottom"));
             let ex2_width = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("width"));
             let ex2_height = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("height"));
             let ex2_pos_right = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("right"));
             let ex2_pos_top = parseInt(window.getComputedStyle(ex2value[i]).getPropertyValue("top"));
-            console.log(ex2_width, ex2_height);
             if (hero_pos_top < ex2_pos_top + ex2_width && hero_pos_top + hero_width > ex2_pos_top && hero_pos_right < ex2_pos_right + ex2_height && hero_height + hero_pos_right > ex2_pos_right) {
-              console.log('héros touché');
                 let suicide_screen = document.getElementById('suicide-screen')
                 suicide_screen.classList.remove('dis-none')
                 changemusiclose()
@@ -583,6 +992,7 @@ $(document).ready(function() {
     let cooldown_keyboard = 0;
     window.addEventListener('keydown', function (e) {
       if (e.keyCode === 32) {
+        e.preventDefault();
         if (cooldown_keyboard == 0) {
           cooldown_keyboard = 1;
           let affiche_cd = document.getElementsByClassName('affiche-cd');
@@ -601,31 +1011,10 @@ $(document).ready(function() {
         }
 
       }
-      console.log(cooldown_keyboard);
 
     })
 // Nouvel fonction
-    function endgame() {
-      let numberenemy = document.getElementsByClassName('enemy')
-      console.log('fuck');
-
-      for (let i = 0; i < numberenemy.length; i++) {
-        console.log('hi');
-        if (numberenemy.length == 1) {
-          console.log(numberenemy);
-          let win_screen = document.getElementById('win-screen');
-          win_screen.classList.remove('dis-none')
-          // changemusiclose(); BUG MUSIQUE
-        }
-        
-      }
-
-
-    }
-    setInterval(function () {
-      endgame()
-    },50)
-  };
+};
 
   // Bouton start et recommencer
 
@@ -659,7 +1048,3 @@ $(document).ready(function() {
 
   // fin du jeu
 })
-
-
-
-
