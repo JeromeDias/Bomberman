@@ -742,7 +742,7 @@ $(document).ready(function() {
         break;
       }
     },1000)
-
+// Ennemi n°5
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
@@ -788,7 +788,7 @@ $(document).ready(function() {
         break;
       }
     },1000)
-
+// Ennemi n°6
     setInterval(function(){
       let random = getRandomInt(4);
       switch (random) {
